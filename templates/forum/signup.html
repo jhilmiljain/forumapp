@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Sign Up</h1>
+<title>{% block title %}User SignUp{% endblock title %}</title>
+<form class="form-signin" method="POST" action="{% url 'signup_page' %}">
+    {% csrf_token %}
+    <p><input type="text" name="email" placeholder="Email"></p>
+    <p><input type="password" name="password1" placeholder="Password" required></p>
+    <p><input type="password" name="password2" placeholder="Password Again" required></p>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy.
+        </label>
+    </div>
+    <button class="btn btn-primary"type="submit">Sign up</button><br>
+    or
+    <a class="btn btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}">
+        <i class="fa fa-google"></i>Sign up with Google</a>
+</form>
+
+{% endblock content %}

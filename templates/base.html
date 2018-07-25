@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+{% url 'home_page' as home_page %}
+      <html>
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <meta name="description" content="">
+          <meta name="author" content="">
+          <!-- Bootstrap core CSS -->
+          <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+          <!-- Custom styles for this template -->
+          <link href="{% static 'css/logo-nav.css' %}" rel="stylesheet">
+          <link href="{% static 'css/style.css' %}" rel="stylesheet">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+          <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+          <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+          <title>{% block title %}{% endblock title%}</title>
+      </head>
+      <body {% ifequal request.get_full_path home_page %} style="background-image: url('/static/img/bg01.jpg')" {% endifequal %}
+                                                           style="background-color:#d2cbcb">
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
+              <a class="navbar-brand" href="/forum/question/listing/">
+                  <img src="http://placehold.it/300x140?text=FORUM" width="150" height="30" alt="20">
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'home_page' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                      <li><a href="{% url 'signup_page' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> |
+                      <li><a href="{% url 'login_page' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  </ul>
+                  <form method="GET" action="{% url 'search' %}"  class="navbar-form navbar-right">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Search for topics" name="q" id="topic_id" >
+                          <div class="input-group-btn">
+                              <button class="btn btn-info">
+                                  <span class="glyphicon glyphicon-search"></span>Search
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </nav>
+
+      <!-- Bootstrap core JavaScript -->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+      {% block content %}
+      {% endblock content %}
+
+      </body>
+      </html>

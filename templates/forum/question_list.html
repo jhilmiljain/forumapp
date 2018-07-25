@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}List Of Questions{% endblock title %}
+{% block content %}
+{% if question_list %}
+<ul>
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h1>List Of Questions</h1>
+            {% for question in question_list %}
+            <li>
+                <h4 class="panel-title">{{ question.created_by }} | {{ question.created_on }}</h4>
+
+                <div class="panel-body">
+                    <a href="{% url 'question_page' question.id %}">{{ question.question_text }}</a>
+                </div>
+            </li>
+            {% endfor %}
+        </div>
+    </div>
+</ul>
+<a href="{% url 'addquestion' %}"><button class="btn btn-primary">Add Question</button></a>
+
+<p>No more questions are available.</p><br>
+{% if question_list.has_other_pages %}
+<div class="text-center">
+    <div class="col-6 offset-3 text-center pagination-set">
+        <nav aria-label="">
+            <ul class="pagination" style="justify-content: center;">
+                {% if question_list.has_previous %}
+                <li class="page-item"><a class="page-link" style="background-color: #ffd536; color: #1e415e; border: #1e415e;"
+                                         href="?page={{ question_list.previous_page_number }}">&laquo;previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" style="background-color: #ffd536; color: #1e415e; border: #1e415e;">
+                    <span>&laquo; previous</span></a></li>
+                {% endif %}
+                {% for pages in page_range %}
+                {% if question_list.number == pages %}
+                <li class="page-item active"><a class="page-link" style="background-color: #1e415e; border: #1e415e;" href="#">{{ pages }}
+                    <span class="sr-only">(current)</span></a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" style="background-color: #ffd536; color: #1e415e; border: #1e415e;"
+                                         href="?page={{ pages }}">{{ pages }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if question_list.has_next %}
+                <li class="page-item"><a class="page-link" style="background-color: #ffd536; color: #1e415e; border: #1e415e;" aria-label="Next"
+                                         href="?page={{ question_list.next_page_number }}">next &raquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><a class="page-link" style="background-color: #ffd536; color: #1e415e; border: #1e415e;">
+                    <span>next &raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

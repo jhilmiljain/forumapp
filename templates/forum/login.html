@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+<h1>Login</h1>
+{% block content %}
+<div class="container">
+
+  <form class="form-signin" action="{% url 'login_page' %}" method="post" id="login-form">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">{{ message }}</h2>
+    <label for="id_username" class="sr-only">Email address</label>
+    <p><input type="text" name="username" id="id_username"placeholder="User Name" required autofocus><br></p>
+    <label for="id_password" class="sr-only">Password</label>
+    <p><input type="password" name="password" id="id_password"placeholder="Password" required><br></p>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn btn-primary"type="submit">Sign in</button>
+  </form>
+
+</div> <!-- /container -->
+{% endblock %}

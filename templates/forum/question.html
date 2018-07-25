@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<title>{% block title %}Question Saved{% endblock title %}</title>
+{% block content %}
+
+<div>
+    {% csrf_token %}
+    <table>
+        <tr>
+            <th>Question Text:</th>
+            <td>{{ question.question_text }}</td>
+        </tr>
+        <tr>
+            <th>Topic:</th>
+            <td>{{ question.Topic.topics_text }}</td>
+        </tr>
+        <tr>
+            <th>created_on:</th>
+            <td>{{ question.created_on }}</td>
+        </tr>
+        <tr>
+            <th>created_by:</th>
+            <td>{{ question.created_by }}</td>
+        </tr>
+        <tr>
+            <th>updated_on:</th>
+            <td>{{ question.updated_on }}</td>
+        </tr>
+        <tr>
+            <th>updated_by:</th>
+            <td>{{question.updated_by}}</td>
+        </tr>
+    </table>
+</div>
+<form method="POST" action="/forum/answer/add/">
+    {% csrf_token %}
+    <p>
+        <strong>Text:</strong><br>
+        <textarea name="post_text" rows=8 cols=40 wrap=virtual></textarea>
+        <input type="hidden" name="question_text_id" value="{{ question.id }}" maxlength=150>
+    </p>
+    <p><button type="submit" class="btn btn-primary" name="submit">Post Answer/Comment</button>
+    </p>
+</form>
+{% endblock content %}
+

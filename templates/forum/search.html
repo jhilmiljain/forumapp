@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    {% csrf_token %}
+    <h1>List of Topics</h1>
+    <ul><p>
+        <select id="Topic_id" name="topics">
+            <option value="0">Select Topic</option>
+            <option value="1">science</option>
+            <option value="2">social science</option></select></p>
+    </ul>
+    <a href="{% url 'addquestion' %}"><button class="btn btn-primary">Add Question</button></a>
+    <p>No more questions are available.</p><br>
+
+</div>
+{% endblock %}
